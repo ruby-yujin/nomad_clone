@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    const Title = () => {
+      return (
+        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+          hello i am a span
+        </h3>
+      );
+    };
+    const Btn = () => (
+      <button
+        onClick={() => console.log("im clicked")}
+        style={{ background: "tomato" }}
+      >
+        click me
+      </button>
+    );
+
+    const Container = () => (
+      <div>
+        <Title />
+        <Btn />
+      </div>
+    );
+    //render 는 사용자에게 보여준다
+    //props 안에서 addEventLister 를 해주는건 아주 훌륭한거다.
+    ReactDOM.render(<Container />, root);
+  </script>
+</html>
