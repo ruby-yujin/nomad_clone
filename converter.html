@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+   
+    function App() {
+      const [minutes,setMinutes] = React.useState(0);
+
+      //flipped(이라는 state)에 단순히 true & false 담을꺼야
+      const [flipped,setFlipped] = React.useState(false);
+
+      const onChanage = (event) => {
+        // console.log(event.target.value);
+        // console.log(event) -> onChange 이벤트가 찍힘!
+        // console.log(event.target) -> value가 적히고있는 input이 찍혀
+        // console.log(event.target.value) -> onChange가 걸려있는 input에 value가 찍혀
+
+        // Q. setMinute는 state(값)을 담아서 리렌더링(업데이트)하는 함수인데 왜거기에 담을까?
+        // A. input에 담긴 값을 어딘가에서 쓸거라 변수에 담아서 접근하려고!
+        setMinutes(event.target.value);
+      }
+
+      //이 함수의 내용은 input들의 상태값을 초기로 돌려! -> button Reset에 연결해주면돼
+      const handleReset = () => {setMinutes(0)}
+
+      //이 함수의 내용은 true -> false / false -> true 로 바꿔주는 거야 
+      const handleFlip = () => {setFlipped((current) => !current)}
+
+      /*
+        flipped의 첫 값(=기본값, 초기값)은 false야 
+        따라서  각 input에 disabled는 일치하면 활성화고 불일치하면 비활성화야
+      */
+
+      return(
+        <div>
+          <h1>Super Converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input id="minutes" type="number" placeholder="Minutes" value={minutes} onChange={onChanage} disabled={flipped === true}/>
+            분
+          </div>
+          <h4>you want convert {minutes}</h4>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input id="hours" type="number" placeholder="Hours" value={Math.round(minutes/60)} disabled={flipped === false}/>
+            시간
+            </div>
+            <button onClick={handleReset}>Reset</button>
+            <button onClick={handleFlip}>Filp</button>
+        </div>
+       
+        )}
+          
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
