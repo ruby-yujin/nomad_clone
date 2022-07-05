@@ -3,6 +3,17 @@
   <body>
     <div id="root"></div>
   </body>
+  <style type="text/css">
+    .converter-wrap {width:300px; margin:0 auto;}
+    h1 {text-align: center;}
+    .form-group {margin-bottom:20px;}
+    .form-group label {font-size:1.5rem;}
+    .form-group input {margin:0 10px;}
+    .form-group span {font-size:1rem; }
+    .button-group { display: flex; justify-content: space-between;}
+    button {width:120px; height:40px; border:none; background: salmon; color:#eee; font-size:18px;}
+
+  </style>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -37,21 +48,24 @@
       */
 
       return(
-        <div>
+        <div className="converter-wrap">
           <h1>Super Converter</h1>
-          <div>
+          <div className="form-group">
             <label htmlFor="minutes">Minutes</label>
             <input id="minutes" type="number" placeholder="Minutes" value={minutes} onChange={onChanage} disabled={flipped === true}/>
-            분
+            <span>분</span>
           </div>
           <h4>you want convert {minutes}</h4>
-          <div>
+          <div className="form-group">
             <label htmlFor="hours">Hours</label>
             <input id="hours" type="number" placeholder="Hours" value={Math.round(minutes/60)} disabled={flipped === false}/>
-            시간
-            </div>
+            <span>시간</span>
+          </div>
+          <div class="button-group">
             <button onClick={handleReset}>Reset</button>
             <button onClick={handleFlip}>Filp</button>
+          </div>
+            
         </div>
        
         )}
