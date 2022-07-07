@@ -20,7 +20,7 @@
   <script type="text/babel">
    
     function App() {
-      const [minutes,setMinutes] = React.useState(0);
+      const [amount,setAmount] = React.useState(0);
 
       //flipped(이라는 state)에 단순히 true & false 담을꺼야
       const [flipped,setFlipped] = React.useState(false);
@@ -33,12 +33,11 @@
 
         // Q. setMinute는 state(값)을 담아서 리렌더링(업데이트)하는 함수인데 왜거기에 담을까?
         // A. input에 담긴 값을 어딘가에서 쓸거라 변수에 담아서 접근하려고!
-        setMinutes(event.target.value);
+        setAmount(event.target.value);
       }
 
       //이 함수의 내용은 input들의 상태값을 초기로 돌려! -> button Reset에 연결해주면돼
-      const handleReset = () => {setMinutes(0)}
-
+      const handleReset = () => {setAmount(0)}
       //이 함수의 내용은 true -> false / false -> true 로 바꿔주는 거야 
       const handleFlip = () => {setFlipped((current) => !current)}
 
@@ -52,15 +51,15 @@
           <h1>Super Converter</h1>
           <div className="form-group">
             <label htmlFor="minutes">Minutes</label>
-            <input id="minutes" type="number" placeholder="Minutes" value={minutes} onChange={onChanage} disabled={flipped === true}/>
+            <input id="minutes" type="number" placeholder="Minutes" value={flipped ? amount*60 : amount} onChange={onChanage} disabled={flipped}/>
             <span>분</span>
           </div>
-          <h4>you want convert {minutes}</h4>
+          <h4>you want convert {amount}</h4>
           <div className="form-group">
             <label htmlFor="hours">Hours</label>
-            <input id="hours" type="number" placeholder="Hours" value={Math.round(minutes/60)} disabled={flipped === false}/>
+            <input id="hours" type="number" placeholder="Hours" value={flipped? amount: Math.round(amount/60)} disabled={!flipped}/>
             <span>시간</span>
-          </div>
+            </div>
           <div class="button-group">
             <button onClick={handleReset}>Reset</button>
             <button onClick={handleFlip}>Filp</button>
