@@ -57,7 +57,7 @@
           <h4>you want convert {amount}</h4>
           <div className="form-group">
             <label htmlFor="hours">Hours</label>
-            <input id="hours" type="number" placeholder="Hours" value={flipped? amount: Math.round(amount/60)} disabled={!flipped}/>
+            <input id="hours" type="number" placeholder="Hours" value={flipped? amount: Math.round(amount/60)}  onChange={onChanage} disabled={!flipped}/>
             <span>시간</span>
             </div>
           <div class="button-group">
